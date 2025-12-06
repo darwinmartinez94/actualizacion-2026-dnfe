@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualización Anual 2026 - Policía Nacional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { 
+      font-family: 'Roboto', sans-serif; 
+    }
+    
+    /* Estilos mejorados para campos de entrada */
+    input, select, textarea { 
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 2px solid #d1d5db;
+      background-color: white;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Efecto al enfocar */
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+    
+    /* Estilo para etiquetas */
+    label { 
+      display: block;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    
+    /* Estilo para los títulos de sección */
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: #1e1b4b;
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(to right, #4f46e5, #7c3aed);
+      border-radius: 2px;
+    }
+    
+    /* Estilo para las secciones */
+    .form-section {
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Mejoras específicas para móviles */
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-section {
+        padding: 1.25rem;
+      }
+      
+      input, select, textarea {
+        padding: 12px 14px;
+        font-size: 15px;
+      }
+      
+      /* Asegurar que las columnas del grid se apilen en móvil */
+      .grid-cols-responsive {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    
+    /* Animación para el envío exitoso */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .success-message {
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    /* Estilo para campos requeridos */
+    .required::after {
+      content: " *";
+      color: #ef4444;
+    }
+    
+    /* Efecto para botones */
+    .btn-submit {
+      background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(30, 27, 75, 0.3);
+    }
+    
+    .btn-submit:active {
+      transform: translateY(-1px);
+    }
+    
+    /* Estilo para la cabecera */
+    .header-gradient {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234f46e5' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    /* Botón flotante */
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 25px;
+      font-weight: bold;
+      box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(239, 68, 68, 0.6);
+    }
+
+    /* Mensaje de despedida */
+    .goodbye-message {
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Tarjeta de presentación */
+    .card-container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      margin: 2rem auto;
+      max-width: 1200px;
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      color: white;
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234f46e5' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+
+    .card-avatar {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: white;
+      border: 5px solid white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-content {
+      padding: 3rem;
+    }
+
+    .info-group {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #f3f4f6;
+    }
+
+    .info-group:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-blue-50 to-indigo-50 min-h-screen py-4 md:py-8">
+  <div class="max-w-6xl mx-auto px-3 md:px-6">
+    <!-- Encabezado (siempre visible) -->
+    <div class="header-gradient text-white p-6 md:p-10 text-center rounded-2xl md:rounded-3xl shadow-2xl mb-8 relative">
+      <div class="relative z-10">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-black mb-4 tracking-tight">ACTUALIZACIÓN ANUAL 2026</h1>
+        <div class="space-y-3">
+          <p class="text-lg md:text-xl lg:text-2xl font-semibold opacity-95">Dirección Nacional de Fuerzas Especiales</p>
+          <p class="text-lg md:text-xl lg:text-2xl font-semibold opacity-95">Base de Despliegue Operacional TIGRES-COE Región Norte</p>
+        </div>
+        <div class="mt-6 flex justify-center">
+          <div class="bg-blue-600/30 backdrop-blur-sm rounded-full px-6 py-3 inline-flex items-center">
+            <i class="fas fa-shield-alt mr-3 text-xl"></i>
+            <span class="font-bold">Formulario Oficial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor del Formulario (visible inicialmente) -->
+    <div id="formContainer">
+      <form id="form2026" class="bg-white rounded-2xl shadow-xl overflow-hidden p-4 md:p-8">
+        <!-- 1. DATOS BÁSICOS -->
+        <section class="form-section bg-gradient-to-br from-gray-50 to-white border border-gray-100">
+          <h2 class="section-title">DATOS PERSONALES</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Grado -->
+            <div>
+              <label class="required">Grado:</label>
+              <div class="relative">
+                <i class="fas fa-user-tie absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="grado" required class="pl-12">
+                  <option value="" disabled selected>Seleccionar grado</option>
+                  <option>Comisario</option><option>Inspector de Policía</option><option>Sub Inspector de Policía</option>
+                  <option>Sub Inspector Auxiliar</option><option>Clase II de Policía</option><option>Clase I de Policía</option>
+                  <option>Agente de Policía</option><option>Policía Técnico</option><option>Policía Auxiliar</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Nombre Completo -->
+            <div>
+              <label class="required">Nombre Completo:</label>
+              <div class="relative">
+                <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="nombre" required class="pl-12" placeholder="Nombre y apellidos">
+              </div>
+            </div>
+
+            <!-- Identidad -->
+            <div>
+              <label class="required">Identidad:</label>
+              <div class="relative">
+                <i class="fas fa-id-card absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="identidad" required pattern="\d{13}" class="pl-12" placeholder="0801199912345">
+              </div>
+              <p class="text-xs text-gray-500 mt-1">13 dígitos sin guiones</p>
+            </div>
+
+            <!-- RTN -->
+            <div>
+              <label class="required">RTN:</label>
+              <div class="relative">
+                <i class="fas fa-credit-card absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="rtn" pattern="\d{14}" class="pl-12" placeholder="08011999123456">
+              </div>
+              <p class="text-xs text-gray-500 mt-1">14 dígitos sin guiones</p>
+            </div>
+
+            <!-- Teléfono -->
+            <div>
+              <label class="required">Teléfono:</label>
+              <div class="relative">
+                <i class="fas fa-phone absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="telefono" required type="tel" pattern="\d{8}" class="pl-12" placeholder="8 dígitos">
+              </div>
+            </div>
+
+            <!-- Cargo actual -->
+            <div>
+              <label class="required">Cargo actual:</label>
+              <div class="relative">
+                <i class="fas fa-briefcase absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="cargo" required class="pl-12">
+                  <option value="" disabled selected>Seleccione su cargo</option>
+                  <option>Jefe de Unidad</option><option>Oficial de Planta</option><option>Operativo</option>
+                  <option>Administrativo</option><option>Auxiliar</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Fecha de ingreso -->
+            <div>
+              <label class="required">Fecha de ingreso a la PN:</label>
+              <div class="relative">
+                <i class="fas fa-calendar-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="fecha_ingreso" type="date" required class="pl-12">
+              </div>
+            </div>
+
+            <!-- Promoción -->
+            <div>
+              <label class="required">Promoción:</label>
+              <div class="relative">
+                <i class="fas fa-graduation-cap absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="promocion" class="pl-12" placeholder="Ej: ITP 080">
+              </div>
+            </div>
+
+            <!-- Chapa -->
+            <div>
+              <label class="required">Chapa:</label>
+              <div class="relative">
+                <i class="fas fa-id-badge absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="chapa" class="pl-12" placeholder="PNHEB13000">
+              </div>
+            </div>
+
+            <!-- Dirección -->
+            <div>
+              <label class="required">Dirección a la que pertenece:</label>
+              <div class="relative">
+                <i class="fas fa-building absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="direccion" required class="pl-12">
+                  <option value="" disabled selected>Seleccione su Dirección</option>
+                  <option>DNFE</option>
+                  <option>DAF</option>
+                  <option>DSP</option>
+                  <option>DDJP</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Unidad -->
+            <div>
+              <label class="required">Unidad a la que pertenece:</label>
+              <div class="relative">
+                <i class="fas fa-users absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="unidad" required class="pl-12">
+                  <option value="" disabled selected>Seleccione su Unidad</option>
+                  <option>COE</option>
+                  <option>COR</option>
+                  <option>COU</option>
+                  <option>AUXILIAR</option>
+                  <option>DNFE TÉCNICO</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Correo electrónico -->
+            <div>
+              <label class="required">Correo electrónico:</label>
+              <div class="relative">
+                <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="correo" type="email" required class="pl-12" placeholder="correo@ejemplo.com">
+              </div>
+            </div>
+
+            <!-- Función -->
+            <div>
+              <label class="required">Función:</label>
+              <div class="relative">
+                <i class="fas fa-tasks absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="funcion" required class="pl-12">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option>Jefe de Base</option>
+                  <option>Sub Jefe de base</option>
+                  <option>Oficial de planta</option>
+                  <option>Oficial Auxiliar</option>
+                  <option>Operativo</option>
+                  <option>Supervisor Personal de transporte</option>
+                  <option>Asistente de la División Administrativa (RRHH)</option>
+                  <option>Asistente de Armas y Municiones</option>
+                  <option>Asistente de Planeamiento Operativo y Mejora Continua</option>
+                  <option>Conductor de Vehiculo</option>
+                  <option>Asistente de Mantenimineto de Instalaciones</option>
+                  <option>Asistente de Barberia</option>
+                  <option>Asistente de Cocina</option>
+                  <option>Asistente area de sastreria</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. INFORMACIÓN COMPLEMENTARIA -->
+        <section class="form-section bg-gradient-to-br from-blue-50 to-white border border-blue-100">
+          <h2 class="section-title">INFORMACIÓN COMPLEMENTARIA</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 grid-cols-responsive">
+            <!-- Fecha de nacimiento -->
+            <div>
+              <label class="required">Fecha de nacimiento:</label>
+              <div class="relative">
+                <i class="fas fa-birthday-cake absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="fecha_nacimiento" type="date" required class="pl-12">
+              </div>
+            </div>
+
+            <!-- Sexo -->
+            <div>
+              <label class="required">Sexo:</label>
+              <div class="relative">
+                <i class="fas fa-venus-mars absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="sexo" required class="pl-12">
+                  <option value="" disabled selected>Seleccione</option>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Nivel académico -->
+            <div>
+              <label>Nivel académico:</label>
+              <div class="relative">
+                <i class="fas fa-user-graduate absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="nivel_academico" class="pl-12" placeholder="Ej: Licenciatura">
+              </div>
+            </div>
+
+            <!-- Profesión -->
+            <div>
+              <label>Profesión:</label>
+              <div class="relative">
+                <i class="fas fa-user-md absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="profesion" class="pl-12" placeholder="Ej: Oficial, Abogado, etc">
+              </div>
+            </div>
+
+            <!-- Tipo de sangre -->
+            <div>
+              <label>Tipo de sangre:</label>
+              <div class="relative">
+                <i class="fas fa-tint absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="sangre" class="pl-12">
+                  <option value="" disabled selected>Seleccione</option>
+                  <option>O+</option><option>O-</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Etnia -->
+            <div>
+              <label>Etnia:</label>
+              <div class="relative">
+                <i class="fas fa-globe-americas absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="etnia" class="pl-12" placeholder="Ej: Mestizo, Garífuna">
+              </div>
+            </div>
+
+            <!-- Estado civil -->
+            <div>
+              <label>Estado civil:</label>
+              <div class="relative">
+                <i class="fas fa-heart absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="estado_civil" class="pl-12">
+                  <option value="" disabled selected>Seleccione</option>
+                  <option>Soltero(a)</option><option>Casado(a)</option><option>Unión Libre</option><option>Divorciado(a)</option><option>Viudo(a)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Lugar de nacimiento -->
+            <div>
+              <label>Lugar de nacimiento:</label>
+              <div class="relative">
+                <i class="fas fa-map-marker-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="lugar_nacimiento" class="pl-12" placeholder="Ciudad, Departamento">
+              </div>
+            </div>
+
+            <!-- Departamento de Residencia -->
+            <div>
+              <label>Departamento de Residencia:</label>
+              <div class="relative">
+                <i class="fas fa-map absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="depto_residencia" class="pl-12">
+                  <option value="" disabled selected>Seleccione</option>
+                  <option>Atlántida</option><option>Colón</option><option>Comayagua</option><option>Copán</option>
+                  <option>Cortés</option><option>Choluteca</option><option>El Paraíso</option><option>Francisco Morazán</option>
+                  <option>Gracias a Dios</option><option>Intibucá</option><option>Islas de la Bahía</option><option>La Paz</option>
+                  <option>Lempira</option><option>Ocotepeque</option><option>Olancho</option><option>Santa Bárbara</option>
+                  <option>Valle</option><option>Yoro</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Municipio de Residencia -->
+            <div>
+              <label>Municipio de Residencia:</label>
+              <div class="relative">
+                <i class="fas fa-map-pin absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="municipio_residencia" class="pl-12" placeholder="Nombre del municipio">
+              </div>
+            </div>
+
+            <!-- Dirección completa de residencia -->
+            <div class="md:col-span-2">
+              <label>Dirección completa de residencia:</label>
+              <div class="relative">
+                <i class="fas fa-home absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="direccion_residencia" rows="3" class="pl-12 pt-4" placeholder="Colonia, calle, número de casa, referencia..."></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. TALLAS Y SALUD -->
+        <section class="form-section bg-gradient-to-br from-gray-50 to-white border border-gray-100">
+          <h2 class="section-title">TALLAS Y SALUD</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Talla camisa -->
+            <div>
+              <label>Talla camisa:</label>
+              <div class="relative">
+                <i class="fas fa-tshirt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="talla_camisa" class="pl-12" placeholder="S, M, L, XL...">
+              </div>
+            </div>
+
+            <!-- Talla pantalón -->
+            <div>
+              <label>Talla pantalón:</label>
+              <div class="relative">
+                <i class="fas fa-tshirt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="talla_pantalon" class="pl-12" placeholder="30, 32, 34...">
+              </div>
+            </div>
+
+            <!-- Talla bota -->
+            <div>
+              <label>Talla bota:</label>
+              <div class="relative">
+                <i class="fas fa-shoe-prints absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="talla_bota" class="pl-12" placeholder="38, 39, 40...">
+              </div>
+            </div>
+
+            <!-- Enfermedades de base -->
+            <div class="md:col-span-3">
+              <label>Enfermedades de base:</label>
+              <div class="relative">
+                <i class="fas fa-heartbeat absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="enfermedad_base" rows="3" class="pl-12 pt-4" placeholder="Especifique si padece alguna enfermedad crónica..."></textarea>
+              </div>
+            </div>
+
+            <!-- Lugar de sepultura preferido -->
+            <div class="md:col-span-3">
+              <label>Lugar de sepultura preferido:</label>
+              <div class="relative">
+                <i class="fas fa-monument absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="sepultura" class="pl-12" placeholder="Nombre del cementerio y ubicación">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. FAMILIARES Y EMERGENCIA -->
+        <section class="form-section bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+          <h2 class="section-title">FAMILIARES Y EMERGENCIA</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Contacto de emergencia -->
+            <div>
+              <label>Contacto de emergencia:</label>
+              <div class="relative">
+                <i class="fas fa-user-friends absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="contacto_emergencia" class="pl-12" placeholder="Nombre completo">
+              </div>
+            </div>
+
+            <!-- Número de emergencia -->
+            <div>
+              <label>Número de emergencia:</label>
+              <div class="relative">
+                <i class="fas fa-phone-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="numero_emergencia" type="tel" class="pl-12" placeholder="8 dígitos">
+              </div>
+            </div>
+
+            <!-- Dirección contacto emergencia -->
+            <div class="md:col-span-2">
+              <label>Dirección contacto emergencia:</label>
+              <div class="relative">
+                <i class="fas fa-map-marker-alt absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="direccion_emergencia" rows="2" class="pl-12 pt-4" placeholder="Dirección completa del contacto de emergencia"></textarea>
+              </div>
+            </div>
+
+            <!-- Nombre del cónyuge -->
+            <div>
+              <label>Nombre del cónyuge:</label>
+              <div class="relative">
+                <i class="fas fa-user-friends absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="conyuge" class="pl-12" placeholder="Nombre completo">
+              </div>
+            </div>
+
+            <!-- DNI del cónyuge -->
+            <div>
+              <label>DNI del cónyuge:</label>
+              <div class="relative">
+                <i class="fas fa-id-card absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="dni_conyuge" class="pl-12" placeholder="Número de identidad">
+              </div>
+            </div>
+
+            <!-- Residencia del cónyuge -->
+            <div>
+              <label>Residencia del cónyuge:</label>
+              <div class="relative">
+                <i class="fas fa-home absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="residencia_conyuge" class="pl-12" placeholder="Dirección de residencia">
+              </div>
+            </div>
+
+            <!-- Nombre del padre -->
+            <div>
+              <label>Nombre del padre:</label>
+              <div class="relative">
+                <i class="fas fa-male absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="padre" class="pl-12" placeholder="Nombre completo">
+              </div>
+            </div>
+
+            <!-- Nombre de la madre -->
+            <div>
+              <label>Nombre de la madre:</label>
+              <div class="relative">
+                <i class="fas fa-female absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="madre" class="pl-12" placeholder="Nombre completo">
+              </div>
+            </div>
+
+            <!-- Hijos -->
+            <div class="md:col-span-2">
+              <label>Hijos (nombres):</label>
+              <div class="relative">
+                <i class="fas fa-child absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="hijos" rows="3" class="pl-12 pt-4" placeholder="Escriba los nombres completos de sus hijos, separados por comas"></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. OTROS DATOS -->
+        <section class="form-section bg-gradient-to-br from-gray-50 to-white border border-gray-100">
+          <h2 class="section-title">OTROS DATOS</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- ¿Tiene cuenta en el Tribunal Superior de Cuentas? -->
+            <div>
+              <label>¿Tiene cuenta en el Tribunal Superior de Cuentas?</label>
+              <div class="relative">
+                <i class="fas fa-balance-scale absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="tiene_cuenta_tribunal" class="pl-12">
+                  <option value="" disabled selected>Seleccione</option>
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ¿Declaro en el año 2025 ante el TSC? -->
+            <div>
+              <label>¿Declaro en el año 2025 ante el TSC?</label>
+              <div class="relative">
+                <i class="fas fa-file-contract absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="declaro_tsc" class="pl-12">
+                  <option value="" disabled selected>Seleccione</option>
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Fusil asignado -->
+            <div>
+              <label>Fusil asignado:</label>
+              <div class="relative">
+                <i class="fas fa-crosshairs absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="fusil" class="pl-12" placeholder="Modelo y número de serie">
+              </div>
+            </div>
+
+            <!-- Pistola asignada -->
+            <div>
+              <label>Pistola asignada:</label>
+              <div class="relative">
+                <i class="fas fa-crosshairs absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="pistola" class="pl-12" placeholder="Modelo y número de serie">
+              </div>
+            </div>
+
+            <!-- Aros de presión -->
+            <div>
+              <label>Aros de presión:</label>
+              <div class="relative">
+                <i class="fas fa-shield-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="aros" class="pl-12" placeholder="Número de serie">
+              </div>
+            </div>
+
+            <!-- Vacaciones pendientes -->
+            <div>
+              <label>Vacaciones pendientes:</label>
+              <div class="relative">
+                <i class="fas fa-umbrella-beach absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="vacaciones" class="pl-12" placeholder="Año">
+              </div>
+            </div>
+
+            <!-- Grupo de salida -->
+            <div>
+              <label>Grupo de salida:</label>
+              <div class="relative">
+                <i class="fas fa-users absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <select name="grupo_salida" class="pl-12">
+                  <option value="" disabled selected>Seleccione</option>
+                  <option>Grupo 1</option>
+                  <option>Grupo 2</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Antigüedad -->
+            <div>
+              <label>Antigüedad (años):</label>
+              <div class="relative">
+                <i class="fas fa-history absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
+                <input name="antiguedad" type="number" class="pl-12" placeholder="Número de años">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. FORMACIÓN Y RECONOCIMIENTOS -->
+        <section class="form-section bg-gradient-to-br from-blue-50 to-white border border-blue-100">
+          <h2 class="section-title">FORMACIÓN Y RECONOCIMIENTOS</h2>
+          
+          <div class="space-y-6">
+            <!-- Cursos internacionales -->
+            <div>
+              <label>Cursos internacionales:</label>
+              <div class="relative">
+                <i class="fas fa-globe absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="cursos_internacionales" rows="3" class="pl-12 pt-4" placeholder="Cursos internacionales realizados (nombre, país, año)..."></textarea>
+              </div>
+            </div>
+
+            <!-- Cursos nacionales -->
+            <div>
+              <label>Cursos nacionales:</label>
+              <div class="relative">
+                <i class="fas fa-certificate absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="cursos_nacionales" rows="3" class="pl-12 pt-4" placeholder="Cursos nacionales realizados (nombre, institución, año)..."></textarea>
+              </div>
+            </div>
+
+            <!-- Seminarios -->
+            <div>
+              <label>Seminarios y talleres:</label>
+              <div class="relative">
+                <i class="fas fa-chalkboard-teacher absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="seminarios" rows="3" class="pl-12 pt-4" placeholder="Seminarios y talleres realizados..."></textarea>
+              </div>
+            </div>
+
+            <!-- Cartas de encomio -->
+            <div>
+              <label>Cartas de encomio o reconocimientos:</label>
+              <div class="relative">
+                <i class="fas fa-award absolute left-4 top-6 transform -translate-y-1/2 text-gray-500"></i>
+                <textarea name="carta_encomio" rows="3" class="pl-12 pt-4" placeholder="Reconocimientos recibidos..."></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Botón de envío -->
+        <div class="text-center py-10">
+          <button type="submit" class="btn-submit text-white font-black text-xl md:text-2xl px-12 md:px-20 py-5 md:py-6 rounded-full shadow-2xl">
+            <i class="fas fa-paper-plane mr-3"></i>ENVIAR ACTUALIZACIÓN 2026
+          </button>
+          <p class="text-gray-600 mt-4 text-sm">Todos los campos marcados con <span class="text-red-600">*</span> son obligatorios</p>
+        </div>
+      </form>
+    </div>
+
+<!-- Contenedor de la Tarjeta (oculto inicialmente) -->
+<div id="cardContainer" class="hidden">
+  <div class="card-container">
+    <div class="card-header">
+      <div class="card-avatar">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <h2 id="cardNombre" class="text-3xl font-bold mb-2">NOMBRE COMPLETO</h2>
+      <p id="cardGradoCargo" class="text-xl opacity-90 mb-1">GRADO • CARGO</p>
+      <p id="cardUnidadDireccion" class="opacity-80">UNIDAD • DIRECCIÓN</p>
+    </div>
+
+    <div class="card-content">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Columna izquierda -->
+        <div class="space-y-6">
+          <!-- Información Personal -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-id-card mr-3 text-indigo-600"></i> Información Personal
+            </h3>
+            <div class="grid grid-cols-1 gap-3">
+              <div>
+                <p class="text-sm text-gray-500">Identidad</p>
+                <p id="cardIdentidad" class="font-semibold text-lg">0801199912345</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">RTN</p>
+                <p id="cardRTN" class="font-semibold text-lg">08011999123456</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Fecha Nacimiento</p>
+                <p id="cardNacimiento" class="font-semibold text-lg">01/01/1990</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Sexo</p>
+                <p id="cardSexo" class="font-semibold text-lg">Masculino</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Estado Civil</p>
+                <p id="cardEstadoCivil" class="font-semibold text-lg">Casado(a)</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Lugar Nacimiento</p>
+                <p id="cardLugarNacimiento" class="font-semibold">Ciudad, Departamento</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Etnia</p>
+                <p id="cardEtnia" class="font-semibold">Mestizo</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contacto y Ubicación -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-map-marker-alt mr-3 text-indigo-600"></i> Contacto y Ubicación
+            </h3>
+            <div class="space-y-3">
+              <p><span class="font-semibold">Teléfono:</span> <span id="cardTelefono">9999-8888</span></p>
+              <p><span class="font-semibold">Correo:</span> <span id="cardCorreo">usuario@ejemplo.com</span></p>
+              <p><span class="font-semibold">Departamento:</span> <span id="cardDeptoResidencia">Francisco Morazán</span></p>
+              <p><span class="font-semibold">Municipio:</span> <span id="cardMunicipioResidencia">Tegucigalpa</span></p>
+              <p><span class="font-semibold">Dirección:</span> <span id="cardDireccionResidencia">Colonia, calle, número</span></p>
+            </div>
+          </div>
+
+          <!-- Tallas -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-tshirt mr-3 text-indigo-600"></i> Tallas
+            </h3>
+            <div class="grid grid-cols-3 gap-4">
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <p class="text-sm text-gray-500 mb-1">Camisa</p>
+                <p id="cardTallaCamisa" class="font-semibold">L</p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <p class="text-sm text-gray-500 mb-1">Pantalón</p>
+                <p id="cardTallaPantalon" class="font-semibold">32</p>
+              </div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <p class="text-sm text-gray-500 mb-1">Bota</p>
+                <p id="cardTallaBota" class="font-semibold">40</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tribunal Superior de Cuentas -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-balance-scale mr-3 text-indigo-600"></i> Tribunal Superior de Cuentas
+            </h3>
+            <div class="space-y-2">
+              <p><span class="font-semibold">¿Tiene cuenta?:</span> <span id="cardCuentaTribunal">Sí</span></p>
+              <p><span class="font-semibold">¿Declaró 2025?:</span> <span id="cardDeclaroTSC">Sí</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="space-y-6">
+          <!-- Información Laboral -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-briefcase mr-3 text-indigo-600"></i> Información Laboral
+            </h3>
+            <div class="space-y-3">
+              <p><span class="font-semibold">Fecha Ingreso:</span> <span id="cardFechaIngreso">01/01/2010</span></p>
+              <p><span class="font-semibold">Promoción:</span> <span id="cardPromocion">ITP 080</span></p>
+              <p><span class="font-semibold">Chapa:</span> <span id="cardChapa">PNHEB13000</span></p>
+              <p><span class="font-semibold">Función:</span> <span id="cardFuncion">Operativo</span></p>
+              <p><span class="font-semibold">Antigüedad:</span> <span id="cardAntiguedad">15</span> años</p>
+              <p><span class="font-semibold">Vacaciones Pendientes:</span> <span id="cardVacaciones">2025</span></p>
+            </div>
+          </div>
+
+          <!-- Información Académica -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-graduation-cap mr-3 text-indigo-600"></i> Información Académica
+            </h3>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <p class="text-sm text-gray-500">Nivel Académico</p>
+                <p id="cardNivelAcademico" class="font-semibold">Licenciatura</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Profesión</p>
+                <p id="cardProfesion" class="font-semibold">Oficial</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Tipo Sangre</p>
+                <p id="cardTipoSangre" class="font-semibold">O+</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Grupo Salida</p>
+                <p id="cardGrupoSalida" class="font-semibold">Grupo 1</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Familiares -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-users mr-3 text-indigo-600"></i> Familiares
+            </h3>
+            <div class="space-y-2">
+              <p><span class="font-semibold">Cónyuge:</span> <span id="cardConyuge">Nombre del cónyuge</span></p>
+              <p><span class="font-semibold">DNI Cónyuge:</span> <span id="cardDNIConyuge">0801199912345</span></p>
+              <p><span class="font-semibold">Residencia Cónyuge:</span> <span id="cardResidenciaConyuge">Dirección</span></p>
+              <p><span class="font-semibold">Padre:</span> <span id="cardPadre">Nombre del padre</span></p>
+              <p><span class="font-semibold">Madre:</span> <span id="cardMadre">Nombre de la madre</span></p>
+              <p><span class="font-semibold">Hijos:</span> <span id="cardHijos">Nombres de hijos</span></p>
+            </div>
+          </div>
+
+          <!-- Contacto de Emergencia -->
+          <div class="info-group">
+            <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-first-aid mr-3 text-indigo-600"></i> Contacto de Emergencia
+            </h3>
+            <div class="space-y-2">
+              <p><span class="font-semibold">Nombre:</span> <span id="cardContactoEmergencia">Nombre completo</span></p>
+              <p><span class="font-semibold">Teléfono:</span> <span id="cardNumeroEmergencia">9999-7777</span></p>
+              <p><span class="font-semibold">Dirección:</span> <span id="cardDireccionEmergencia">Dirección completa</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Salud -->
+      <div class="info-group mt-8">
+        <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+          <i class="fas fa-heartbeat mr-3 text-indigo-600"></i> Salud
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-3">
+            <p><span class="font-semibold">Enfermedades de Base:</span></p>
+            <div class="bg-gray-50 p-4 rounded-xl min-h-[80px]">
+              <p id="cardEnfermedadBase" class="text-gray-700">Ninguna enfermedad reportada</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <p><span class="font-semibold">Lugar de Sepultura Preferido:</span></p>
+            <div class="bg-gray-50 p-4 rounded-xl min-h-[80px]">
+              <p id="cardSepultura" class="text-gray-700">Cementerio General, Ciudad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Equipo Asignado -->
+      <div class="info-group mt-8">
+        <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+          <i class="fas fa-shield-alt mr-3 text-indigo-600"></i> Equipo Asignado
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-gray-50 p-4 rounded-xl">
+            <p class="text-sm text-gray-500 mb-2">Fusil</p>
+            <p id="cardFusil" class="font-semibold text-lg">M4 Carbine - SN12345</p>
+          </div>
+          <div class="bg-gray-50 p-4 rounded-xl">
+            <p class="text-sm text-gray-500 mb-2">Pistola</p>
+            <p id="cardPistola" class="font-semibold text-lg">Glock 17 - SN67890</p>
+          </div>
+          <div class="bg-gray-50 p-4 rounded-xl">
+            <p class="text-sm text-gray-500 mb-2">Aros de Presión</p>
+            <p id="cardAros" class="font-semibold text-lg">SN54321</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formación y Reconocimientos -->
+      <div class="info-group mt-8">
+        <h3 class="flex items-center text-xl font-bold text-gray-800 mb-4">
+          <i class="fas fa-award mr-3 text-indigo-600"></i> Formación y Reconocimientos
+        </h3>
+        
+        <!-- Cursos Internacionales -->
+        <div class="mb-6">
+          <h4 class="font-bold text-gray-700 mb-2 flex items-center">
+            <i class="fas fa-globe-americas mr-2 text-blue-600"></i> Cursos Internacionales
+          </h4>
+          <div class="bg-blue-50 p-4 rounded-xl">
+            <p id="cardCursosInternacionales" class="text-gray-700 whitespace-pre-line">No se registraron cursos internacionales</p>
+          </div>
+        </div>
+
+        <!-- Cursos Nacionales -->
+        <div class="mb-6">
+          <h4 class="font-bold text-gray-700 mb-2 flex items-center">
+            <i class="fas fa-certificate mr-2 text-green-600"></i> Cursos Nacionales
+          </h4>
+          <div class="bg-green-50 p-4 rounded-xl">
+            <p id="cardCursosNacionales" class="text-gray-700 whitespace-pre-line">No se registraron cursos nacionales</p>
+          </div>
+        </div>
+
+        <!-- Seminarios y Talleres -->
+        <div class="mb-6">
+          <h4 class="font-bold text-gray-700 mb-2 flex items-center">
+            <i class="fas fa-chalkboard-teacher mr-2 text-purple-600"></i> Seminarios y Talleres
+          </h4>
+          <div class="bg-purple-50 p-4 rounded-xl">
+            <p id="cardSeminarios" class="text-gray-700 whitespace-pre-line">No se registraron seminarios</p>
+          </div>
+        </div>
+
+        <!-- Cartas de Encomio -->
+        <div>
+          <h4 class="font-bold text-gray-700 mb-2 flex items-center">
+            <i class="fas fa-envelope mr-2 text-red-600"></i> Cartas de Encomio o Reconocimientos
+          </h4>
+          <div class="bg-red-50 p-4 rounded-xl">
+            <p id="cardCartasEncomio" class="text-gray-700 whitespace-pre-line">No se registraron reconocimientos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Contenedor de Despedida (oculto inicialmente) -->
+    <div id="goodbyeContainer" class="hidden">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 goodbye-message">
+        <div class="bg-gradient-to-r from-green-100 to-emerald-100 rounded-full p-6 mb-8">
+          <i class="fas fa-check-circle text-6xl text-green-600"></i>
+        </div>
+        <h2 class="text-4xl font-black text-gray-800 mb-6">¡ACTUALIZACIÓN ANUAL 2026 DNFE EL PROGRESO!</h2>
+        <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+          Su información ha sido registrada exitosamente. Gracias por mantener sus datos actualizados.
+        </p>
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
+          <p class="text-lg text-gray-700">
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+            Esta ventana se cerrará automáticamente en <span id="countdown" class="font-bold">10</span> segundos...
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie de página (siempre visible) -->
+    <div class="mt-10 text-center text-gray-600 text-sm">
+      <p>© 2026 Dirección Nacional de Fuerzas Especiales - Base de Despliegue Operacional TIGRES-COE Región Norte</p>
+      <p class="mt-2">Este es un formulario oficial para uso interno de la institución</p>
+    </div>
+  </div>
+
+  <!-- Botón flotante para cerrar (visible solo cuando se muestra la tarjeta) -->
+  <button id="closeBtn" class="floating-btn hidden">
+    <i class="fas fa-times"></i> Cerrar
+  </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+     // URL base del API backend
+  const API_URL = 'http://localhost:3000/api';
+
+  document.getElementById("form2026").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = e.target.querySelector("button[type='submit']");
+    const originalText = btn.innerHTML;
+    
+    // Deshabilitar botón y mostrar estado de carga
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i>ENVIANDO...';
+    
+    // Recopilar datos del formulario
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Validar datos requeridos
+    const requiredFields = ['grado', 'nombre', 'identidad', 'telefono', 'cargo', 
+                          'fecha_ingreso', 'direccion', 'unidad', 'correo', 
+                          'funcion', 'fecha_nacimiento', 'sexo'];
+    
+    const missingFields = requiredFields.filter(field => !data[field]);
+    
+    if (missingFields.length > 0) {
+      alert(`Faltan campos obligatorios: ${missingFields.join(', ')}`);
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+      return;
+    }
+    
+    try {
+      // Enviar datos al backend
+      const response = await fetch(`${API_URL}/personal`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log('✅ Registro exitoso. ID:', result.id);
+        
+        // Ocultar formulario y mostrar tarjeta con los datos
+        document.getElementById("formContainer").classList.add("hidden");
+        document.getElementById("cardContainer").classList.remove("hidden");
+        document.getElementById("closeBtn").classList.remove("hidden");
+        
+        // Actualizar tarjeta con datos del formulario
+        updateCardWithData(data);
+        
+        // Desplazar hacia arriba para ver la tarjeta
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Limpiar formulario
+        e.target.reset();
+        
+      } else {
+        alert(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      console.error(' Error al enviar formulario:', error);
+      alert('Error al enviar el formulario. Por favor, intente nuevamente.');
+    } finally {
+      // Restaurar botón
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
+  });
+    
+    // Función para formatear fecha
+    function formatDate(dateString) {
+      if (!dateString) return 'No especificado';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('es-HN');
+    }
+    
+    // Función para actualizar la tarjeta con los datos
+    // Función para actualizar la tarjeta con los datos
+function updateCardWithData(data) {
+  // Información principal
+  document.getElementById("cardNombre").textContent = data.nombre || 'No especificado';
+  document.getElementById("cardGradoCargo").textContent = `${data.grado} • ${data.cargo}`;
+  document.getElementById("cardUnidadDireccion").textContent = `${data.unidad} • ${data.direccion}`;
+  
+  // Información personal
+  document.getElementById("cardIdentidad").textContent = data.identidad || 'No especificado';
+  document.getElementById("cardRTN").textContent = data.rtn || 'No especificado';
+  document.getElementById("cardNacimiento").textContent = formatDate(data.fecha_nacimiento);
+  document.getElementById("cardSexo").textContent = data.sexo || 'No especificado';
+  document.getElementById("cardEstadoCivil").textContent = data.estado_civil || 'No especificado';
+  document.getElementById("cardLugarNacimiento").textContent = data.lugar_nacimiento || 'No especificado';
+  document.getElementById("cardEtnia").textContent = data.etnia || 'No especificado';
+  
+  // Contacto y ubicación
+  document.getElementById("cardTelefono").textContent = data.telefono || 'No especificado';
+  document.getElementById("cardCorreo").textContent = data.correo || 'No especificado';
+  document.getElementById("cardDeptoResidencia").textContent = data.depto_residencia || 'No especificado';
+  document.getElementById("cardMunicipioResidencia").textContent = data.municipio_residencia || 'No especificado';
+  document.getElementById("cardDireccionResidencia").textContent = data.direccion_residencia || 'No especificado';
+  
+  // Tallas
+  document.getElementById("cardTallaCamisa").textContent = data.talla_camisa || 'No especificada';
+  document.getElementById("cardTallaPantalon").textContent = data.talla_pantalon || 'No especificada';
+  document.getElementById("cardTallaBota").textContent = data.talla_bota || 'No especificada';
+  
+  // Tribunal Superior de Cuentas
+  document.getElementById("cardCuentaTribunal").textContent = data.tiene_cuenta_tribunal || 'No especificado';
+  document.getElementById("cardDeclaroTSC").textContent = data.declaro_tsc || 'No especificado';
+  
+  // Información laboral
+  document.getElementById("cardFechaIngreso").textContent = formatDate(data.fecha_ingreso);
+  document.getElementById("cardPromocion").textContent = data.promocion || 'No especificado';
+  document.getElementById("cardChapa").textContent = data.chapa || 'No especificado';
+  document.getElementById("cardFuncion").textContent = data.funcion || 'No especificado';
+  document.getElementById("cardAntiguedad").textContent = data.antiguedad || 'No especificado';
+  document.getElementById("cardVacaciones").textContent = data.vacaciones || 'No especificado';
+  
+  // Información académica
+  document.getElementById("cardNivelAcademico").textContent = data.nivel_academico || 'No especificado';
+  document.getElementById("cardProfesion").textContent = data.profesion || 'No especificado';
+  document.getElementById("cardTipoSangre").textContent = data.sangre || 'No especificado';
+  document.getElementById("cardGrupoSalida").textContent = data.grupo_salida || 'No especificado';
+  
+  // Familiares
+  document.getElementById("cardConyuge").textContent = data.conyuge || 'No especificado';
+  document.getElementById("cardDNIConyuge").textContent = data.dni_conyuge || 'No especificado';
+  document.getElementById("cardResidenciaConyuge").textContent = data.residencia_conyuge || 'No especificado';
+  document.getElementById("cardPadre").textContent = data.padre || 'No especificado';
+  document.getElementById("cardMadre").textContent = data.madre || 'No especificado';
+  document.getElementById("cardHijos").textContent = data.hijos || 'No especificado';
+  
+  // Contacto de emergencia
+  document.getElementById("cardContactoEmergencia").textContent = data.contacto_emergencia || 'No especificado';
+  document.getElementById("cardNumeroEmergencia").textContent = data.numero_emergencia || 'No especificado';
+  document.getElementById("cardDireccionEmergencia").textContent = data.direccion_emergencia || 'No especificado';
+  
+  // Salud
+  document.getElementById("cardEnfermedadBase").textContent = data.enfermedad_base || 'No se registraron enfermedades';
+  document.getElementById("cardSepultura").textContent = data.sepultura || 'No especificado';
+  
+  // Equipo
+  document.getElementById("cardFusil").textContent = data.fusil || 'No asignado';
+  document.getElementById("cardPistola").textContent = data.pistola || 'No asignada';
+  document.getElementById("cardAros").textContent = data.aros || 'No asignados';
+  
+  // Formación y reconocimientos
+  document.getElementById("cardCursosInternacionales").textContent = data.cursos_internacionales || 'No se registraron cursos internacionales';
+  document.getElementById("cardCursosNacionales").textContent = data.cursos_nacionales || 'No se registraron cursos nacionales';
+  document.getElementById("cardSeminarios").textContent = data.seminarios || 'No se registraron seminarios';
+  document.getElementById("cardCartasEncomio").textContent = data.carta_encomio || 'No se registraron reconocimientos';
+}
+    // Botón para cerrar
+    document.getElementById("closeBtn").addEventListener("click", function() {
+      // Ocultar tarjeta y botón flotante
+      document.getElementById("cardContainer").classList.add("hidden");
+      document.getElementById("closeBtn").classList.add("hidden");
+      
+      // Mostrar mensaje de despedida
+      document.getElementById("goodbyeContainer").classList.remove("hidden");
+      
+      // Iniciar cuenta regresiva
+      let countdown = 10;
+      const countdownElement = document.getElementById("countdown");
+      const countdownInterval = setInterval(() => {
+        countdown--;
+        countdownElement.textContent = countdown;
+        
+        if (countdown <= 0) {
+          clearInterval(countdownInterval);
+          // Mostrar mensaje final y luego redirigir o cerrar
+          showFinalMessage();
+        }
+      }, 1000);
+    });
+    
+    function showFinalMessage() {
+      document.getElementById("goodbyeContainer").innerHTML = `
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 goodbye-message">
+          <div class="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-full p-6 mb-8">
+            <i class="fas fa-flag-checkered text-6xl text-blue-600"></i>
+          </div>
+          <h2 class="text-4xl font-black text-gray-800 mb-6">¡PROCESO COMPLETADO!</h2>
+          <p class="text-xl text-gray-600 mb-6">Gracias por utilizar el sistema de actualización.</p>
+          <div class="mt-8">
+            <p class="text-lg text-gray-700">
+              <i class="fas fa-door-open text-green-500 mr-2"></i>
+              Puede cerrar esta ventana ahora.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Validación en tiempo real
+    document.querySelector('input[name="identidad"]')?.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').substring(0, 13);
+    });
+    
+    document.querySelector('input[name="rtn"]')?.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').substring(0, 14);
+    });
+    
+    document.querySelector('input[name="telefono"]')?.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').substring(0, 8);
+    });
+
+    document.querySelector('input[name="numero_emergencia"]')?.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').substring(0, 8);
+    });
+     document.querySelector('input[name="dni_conyuge"]')?.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').substring(0, 13);
+    });
+  </script>
+</body>
+</html>
