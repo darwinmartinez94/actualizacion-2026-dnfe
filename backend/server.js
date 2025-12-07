@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { query, testConnection } = require("./database/db");
-const { version } = require("react");
 require("dotenv").config();
 
 const app = express();

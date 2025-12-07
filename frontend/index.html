@@ -706,9 +706,9 @@
               </div>
             </div>
 
-            <!-- ¿Declaro en el año 2025 ante el TSC? -->
+            <!-- ¿Declaro en el año 2026 ante el TSC? -->
             <div>
-              <label>¿Declaro en el año 2025 ante el TSC?</label>
+              <label>¿Declaro en el año 2026 ante el TSC?</label>
               <div class="relative">
                 <i class="fas fa-file-contract absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
                 <select name="declaro_tsc" class="pl-12">
@@ -1130,7 +1130,7 @@
 
   <script>
      // URL base del API backend
-  const API_URL = 'https://actualizacion-2026-dnfe.onrender.com/api';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   document.getElementById("form2026").addEventListener("submit", async e => {
     e.preventDefault();
@@ -1172,7 +1172,7 @@
       const result = await response.json();
       
       if (result.success) {
-        console.log('✅ Registro exitoso. ID:', result.id);
+        console.log(' Registro exitoso. ID:', result.id);
         
         // Ocultar formulario y mostrar tarjeta con los datos
         document.getElementById("formContainer").classList.add("hidden");
@@ -1208,7 +1208,6 @@
       return date.toLocaleDateString('es-HN');
     }
     
-    // Función para actualizar la tarjeta con los datos
     // Función para actualizar la tarjeta con los datos
 function updateCardWithData(data) {
   // Información principal
