@@ -1,14 +1,38 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { query } = require("./database/db");
+const { query, testConnection } = require("./database/db");
+const { version } = require("react");
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+//Confugurar CORS para produccion
+const corsOptions = {
+  origin: function (origin, callback) {
+    //en desarrollo permitir localhost
+    if (process.env.NODE_ENV !== "production") {
+      return callback(null, true);
+    }
+    // En producción, permitir solo el dominio específico
+    const allowedOrigin = [
+      "https://actualizacion-2026-dnfe.onrender.com", // frontend
+      "http://localhost:3000", //local
+    ];
+
+    if (!origin || allowedOrigin.indexOf(origin) !== -1) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("No permitido por CORS"));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -16,11 +40,42 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("../frontend"));
 
 // Ruta de prueba
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", message: "Servidor funcionando", version: "1.0.0" });
+app.get("/api/health", async (req, res) => {
+  try {
+    const dbConnected = await testConnection();
+
+    res.json({
+      status: "ok",
+      message: "Servidor funcionando",
+      version: "1.0.0",
+      enviroment: process.env.NODE_ENV || "development",
+      database: dbConnected ? "Conectada" : "No conectada",
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Error en el servidor",
+    });
+  }
 });
 
-// Crear un nuevo registro (sin protección)
+//ruta principal
+app.get("/", (req, res) => {
+  res.json({
+    message: "Bienvenido a la API de Actualización DNFE 2026",
+    version: "1.0.0",
+    enviroment: process.env.NODE_ENV || "development",
+    endpoins: {
+      health: "GET /api/health",
+      createRecord: "POST /api/personal",
+      getAllRecords: "GET /api/personal",
+      getRecordById: "GET /api/personal/:id",
+    },
+  });
+});
+
+// Crear un nuevo registro
 app.post("/api/personal", async (req, res) => {
   try {
     const {
@@ -201,14 +256,16 @@ app.post("/api/personal", async (req, res) => {
   }
 });
 
-// Ruta para obtener todos los registros (opcional, si la necesitas)
+// Ruta para obtener todos los registros
 app.get("/api/personal", async (req, res) => {
   try {
     const result = await query(
-      "SELECT id, nombre_completo, grado, cargo, unidad, fecha_ingreso FROM personal ORDER BY fecha_ingreso DESC"
+      "SELECT id, nombre_completo, grado, cargo, unidad, created_at FROM personal ORDER BY created_at DESC LIMIT 10"
     );
+
     res.json({
       success: true,
+      count: result.rows.length,
       data: result.rows,
     });
   } catch (error) {
@@ -220,7 +277,7 @@ app.get("/api/personal", async (req, res) => {
   }
 });
 
-// Ruta para obtener un registro por ID (opcional)
+// Ruta para obtener un registro por ID
 app.get("/api/personal/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -247,6 +304,10 @@ app.get("/api/personal/:id", async (req, res) => {
 });
 
 // Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+app.listen(PORT, async () => {
+  console.log(`Servidor iniciado en puerto ${PORT}`);
+  console.log(` Entorno: ${process.env.NODE_ENV || "development"}`);
+
+  // Probar conexión a BD al iniciar
+  await testConnection();
 });
