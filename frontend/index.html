@@ -1161,7 +1161,7 @@
     
     try {
       // Enviar datos al backend
-      const response = await fetch(`${API_URL}/personal`, {
+      const response = await fetch(`${API_URL}/api/personal`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1209,79 +1209,79 @@
     }
     
     // Función para actualizar la tarjeta con los datos
-function updateCardWithData(data) {
-  // Información principal
-  document.getElementById("cardNombre").textContent = data.nombre || 'No especificado';
-  document.getElementById("cardGradoCargo").textContent = `${data.grado} • ${data.cargo}`;
-  document.getElementById("cardUnidadDireccion").textContent = `${data.unidad} • ${data.direccion}`;
-  
-  // Información personal
-  document.getElementById("cardIdentidad").textContent = data.identidad || 'No especificado';
-  document.getElementById("cardRTN").textContent = data.rtn || 'No especificado';
-  document.getElementById("cardNacimiento").textContent = formatDate(data.fecha_nacimiento);
-  document.getElementById("cardSexo").textContent = data.sexo || 'No especificado';
-  document.getElementById("cardEstadoCivil").textContent = data.estado_civil || 'No especificado';
-  document.getElementById("cardLugarNacimiento").textContent = data.lugar_nacimiento || 'No especificado';
-  document.getElementById("cardEtnia").textContent = data.etnia || 'No especificado';
-  
-  // Contacto y ubicación
-  document.getElementById("cardTelefono").textContent = data.telefono || 'No especificado';
-  document.getElementById("cardCorreo").textContent = data.correo || 'No especificado';
-  document.getElementById("cardDeptoResidencia").textContent = data.depto_residencia || 'No especificado';
-  document.getElementById("cardMunicipioResidencia").textContent = data.municipio_residencia || 'No especificado';
-  document.getElementById("cardDireccionResidencia").textContent = data.direccion_residencia || 'No especificado';
-  
-  // Tallas
-  document.getElementById("cardTallaCamisa").textContent = data.talla_camisa || 'No especificada';
-  document.getElementById("cardTallaPantalon").textContent = data.talla_pantalon || 'No especificada';
-  document.getElementById("cardTallaBota").textContent = data.talla_bota || 'No especificada';
-  
-  // Tribunal Superior de Cuentas
-  document.getElementById("cardCuentaTribunal").textContent = data.tiene_cuenta_tribunal || 'No especificado';
-  document.getElementById("cardDeclaroTSC").textContent = data.declaro_tsc || 'No especificado';
-  
-  // Información laboral
-  document.getElementById("cardFechaIngreso").textContent = formatDate(data.fecha_ingreso);
-  document.getElementById("cardPromocion").textContent = data.promocion || 'No especificado';
-  document.getElementById("cardChapa").textContent = data.chapa || 'No especificado';
-  document.getElementById("cardFuncion").textContent = data.funcion || 'No especificado';
-  document.getElementById("cardAntiguedad").textContent = data.antiguedad || 'No especificado';
-  document.getElementById("cardVacaciones").textContent = data.vacaciones || 'No especificado';
-  
-  // Información académica
-  document.getElementById("cardNivelAcademico").textContent = data.nivel_academico || 'No especificado';
-  document.getElementById("cardProfesion").textContent = data.profesion || 'No especificado';
-  document.getElementById("cardTipoSangre").textContent = data.sangre || 'No especificado';
-  document.getElementById("cardGrupoSalida").textContent = data.grupo_salida || 'No especificado';
-  
-  // Familiares
-  document.getElementById("cardConyuge").textContent = data.conyuge || 'No especificado';
-  document.getElementById("cardDNIConyuge").textContent = data.dni_conyuge || 'No especificado';
-  document.getElementById("cardResidenciaConyuge").textContent = data.residencia_conyuge || 'No especificado';
-  document.getElementById("cardPadre").textContent = data.padre || 'No especificado';
-  document.getElementById("cardMadre").textContent = data.madre || 'No especificado';
-  document.getElementById("cardHijos").textContent = data.hijos || 'No especificado';
-  
-  // Contacto de emergencia
-  document.getElementById("cardContactoEmergencia").textContent = data.contacto_emergencia || 'No especificado';
-  document.getElementById("cardNumeroEmergencia").textContent = data.numero_emergencia || 'No especificado';
-  document.getElementById("cardDireccionEmergencia").textContent = data.direccion_emergencia || 'No especificado';
-  
-  // Salud
-  document.getElementById("cardEnfermedadBase").textContent = data.enfermedad_base || 'No se registraron enfermedades';
-  document.getElementById("cardSepultura").textContent = data.sepultura || 'No especificado';
-  
-  // Equipo
-  document.getElementById("cardFusil").textContent = data.fusil || 'No asignado';
-  document.getElementById("cardPistola").textContent = data.pistola || 'No asignada';
-  document.getElementById("cardAros").textContent = data.aros || 'No asignados';
-  
-  // Formación y reconocimientos
-  document.getElementById("cardCursosInternacionales").textContent = data.cursos_internacionales || 'No se registraron cursos internacionales';
-  document.getElementById("cardCursosNacionales").textContent = data.cursos_nacionales || 'No se registraron cursos nacionales';
-  document.getElementById("cardSeminarios").textContent = data.seminarios || 'No se registraron seminarios';
-  document.getElementById("cardCartasEncomio").textContent = data.carta_encomio || 'No se registraron reconocimientos';
-}
+    function updateCardWithData(data) {
+      // Información principal
+      document.getElementById("cardNombre").textContent = data.nombre || 'No especificado';
+      document.getElementById("cardGradoCargo").textContent = `${data.grado} • ${data.cargo}`;
+      document.getElementById("cardUnidadDireccion").textContent = `${data.unidad} • ${data.direccion}`;
+      
+      // Información personal
+      document.getElementById("cardIdentidad").textContent = data.identidad || 'No especificado';
+      document.getElementById("cardRTN").textContent = data.rtn || 'No especificado';
+      document.getElementById("cardNacimiento").textContent = formatDate(data.fecha_nacimiento);
+      document.getElementById("cardSexo").textContent = data.sexo || 'No especificado';
+      document.getElementById("cardEstadoCivil").textContent = data.estado_civil || 'No especificado';
+      document.getElementById("cardLugarNacimiento").textContent = data.lugar_nacimiento || 'No especificado';
+      document.getElementById("cardEtnia").textContent = data.etnia || 'No especificado';
+      
+      // Contacto y ubicación
+      document.getElementById("cardTelefono").textContent = data.telefono || 'No especificado';
+      document.getElementById("cardCorreo").textContent = data.correo || 'No especificado';
+      document.getElementById("cardDeptoResidencia").textContent = data.depto_residencia || 'No especificado';
+      document.getElementById("cardMunicipioResidencia").textContent = data.municipio_residencia || 'No especificado';
+      document.getElementById("cardDireccionResidencia").textContent = data.direccion_residencia || 'No especificado';
+      
+      // Tallas
+      document.getElementById("cardTallaCamisa").textContent = data.talla_camisa || 'No especificada';
+      document.getElementById("cardTallaPantalon").textContent = data.talla_pantalon || 'No especificada';
+      document.getElementById("cardTallaBota").textContent = data.talla_bota || 'No especificada';
+      
+      // Tribunal Superior de Cuentas
+      document.getElementById("cardCuentaTribunal").textContent = data.tiene_cuenta_tribunal || 'No especificado';
+      document.getElementById("cardDeclaroTSC").textContent = data.declaro_tsc || 'No especificado';
+      
+      // Información laboral
+      document.getElementById("cardFechaIngreso").textContent = formatDate(data.fecha_ingreso);
+      document.getElementById("cardPromocion").textContent = data.promocion || 'No especificado';
+      document.getElementById("cardChapa").textContent = data.chapa || 'No especificado';
+      document.getElementById("cardFuncion").textContent = data.funcion || 'No especificado';
+      document.getElementById("cardAntiguedad").textContent = data.antiguedad || 'No especificado';
+      document.getElementById("cardVacaciones").textContent = data.vacaciones || 'No especificado';
+      
+      // Información académica
+      document.getElementById("cardNivelAcademico").textContent = data.nivel_academico || 'No especificado';
+      document.getElementById("cardProfesion").textContent = data.profesion || 'No especificado';
+      document.getElementById("cardTipoSangre").textContent = data.sangre || 'No especificado';
+      document.getElementById("cardGrupoSalida").textContent = data.grupo_salida || 'No especificado';
+      
+      // Familiares
+      document.getElementById("cardConyuge").textContent = data.conyuge || 'No especificado';
+      document.getElementById("cardDNIConyuge").textContent = data.dni_conyuge || 'No especificado';
+      document.getElementById("cardResidenciaConyuge").textContent = data.residencia_conyuge || 'No especificado';
+      document.getElementById("cardPadre").textContent = data.padre || 'No especificado';
+      document.getElementById("cardMadre").textContent = data.madre || 'No especificado';
+      document.getElementById("cardHijos").textContent = data.hijos || 'No especificado';
+      
+      // Contacto de emergencia
+      document.getElementById("cardContactoEmergencia").textContent = data.contacto_emergencia || 'No especificado';
+      document.getElementById("cardNumeroEmergencia").textContent = data.numero_emergencia || 'No especificado';
+      document.getElementById("cardDireccionEmergencia").textContent = data.direccion_emergencia || 'No especificado';
+      
+      // Salud
+      document.getElementById("cardEnfermedadBase").textContent = data.enfermedad_base || 'No se registraron enfermedades';
+      document.getElementById("cardSepultura").textContent = data.sepultura || 'No especificado';
+      
+      // Equipo
+      document.getElementById("cardFusil").textContent = data.fusil || 'No asignado';
+      document.getElementById("cardPistola").textContent = data.pistola || 'No asignada';
+      document.getElementById("cardAros").textContent = data.aros || 'No asignados';
+      
+      // Formación y reconocimientos
+      document.getElementById("cardCursosInternacionales").textContent = data.cursos_internacionales || 'No se registraron cursos internacionales';
+      document.getElementById("cardCursosNacionales").textContent = data.cursos_nacionales || 'No se registraron cursos nacionales';
+      document.getElementById("cardSeminarios").textContent = data.seminarios || 'No se registraron seminarios';
+      document.getElementById("cardCartasEncomio").textContent = data.carta_encomio || 'No se registraron reconocimientos';
+    }
     // Botón para cerrar
     document.getElementById("closeBtn").addEventListener("click", function() {
       // Ocultar tarjeta y botón flotante
